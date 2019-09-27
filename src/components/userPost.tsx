@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { Table } from "semantic-ui-react";
+
 interface Post {
   userId: number;
   id: number;
@@ -17,14 +19,6 @@ interface Props {
   posts: Post[];
 }
 
-const tableInfo = {
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "space-around",
-  border: "2px solid blue",
-  cursor: "pointer"
-} as React.CSSProperties;
-
 class UserPost extends React.Component<Props> {
   render() {
     const { posts } = this.props;
@@ -33,12 +27,20 @@ class UserPost extends React.Component<Props> {
     }
     const firstPost = posts[0];
     return (
-      <table id="posts">
-        <tr style={tableInfo} key={firstPost.id}>
-          <td style={tableInfo}>{firstPost.title}</td>
-          <td style={tableInfo}>{firstPost.body}</td>
-        </tr>
-      </table>
+      <Table celled>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Title</Table.HeaderCell>
+            <Table.HeaderCell>Body</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body id="posts">
+          <Table.Row key={firstPost.id}>
+            <Table.Cell>{firstPost.title}</Table.Cell>
+            <Table.Cell>{firstPost.body}</Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
     );
   }
 }

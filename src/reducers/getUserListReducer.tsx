@@ -1,7 +1,7 @@
-interface UserListAction {
-  type: string;
-  payload: any;
-}
+// interface UserListAction {
+//   type: string;
+//   payload: any;
+// }
 
 export default (state: Object[] = [], action: any) => {
   switch (action.type) {
