@@ -3,29 +3,16 @@ import { connect } from "react-redux";
 import { getUserPost, getUserList } from "../actions";
 import Search from "./search";
 import { Table } from "semantic-ui-react";
+import CSS from "csstype";
 
-// const pageCont = {
-//   display: "flex",
-//   flexDirection: "column",
-//   alignItems: "center",
-//   border: "5px solid gray",
-//   width: "100%"
-// } as React.CSSProperties;
-// const tableLabels = {
-//   display: "flex",
-//   flexDirection: "row",
-//   justifyContent: "space-around",
-//   border: "2px solid green",
-//   fontSize: "24px",
-//   width: "100%",
-//   minWidth: "600px"
-// } as React.CSSProperties;
-// const tableInfo = {
-//   width: "100%",
-//   cursor: "pointer",
-//   textAlign: "center"
-// } as React.CSSProperties;
-
+const searchStyle: CSS.Properties = {
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center"
+};
+const tableInfo: CSS.Properties = {
+  cursor: "pointer"
+};
 interface User {
   id: number;
   email: string;
@@ -86,7 +73,7 @@ class UserList extends React.Component<Props, State> {
         ? users.filter(user => user.name.toLowerCase().includes(searchInput))
         : users;
     return userArray.map(user => (
-      <Table.Row>
+      <Table.Row style={tableInfo}>
         <Table.Cell>
           <a
             id={user.id.toString()}
@@ -125,7 +112,15 @@ class UserList extends React.Component<Props, State> {
   public render() {
     return (
       <div>
-        <Table celled padded>
+        <br />
+        <div style={searchStyle}>
+          <Search
+            handleSearchInput={(input: string) =>
+              this.setState({ searchInput: input })
+            }
+          />
+        </div>
+        <Table celled padded selectable>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Name</Table.HeaderCell>
@@ -136,13 +131,6 @@ class UserList extends React.Component<Props, State> {
           </Table.Header>
           <Table.Body>{this.renderTableData()}</Table.Body>
         </Table>
-        <div>
-          <Search
-            handleSearchInput={(input: string) =>
-              this.setState({ searchInput: input })
-            }
-          />
-        </div>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Table } from "semantic-ui-react";
+import { Table, Button } from "semantic-ui-react";
 
 interface Post {
   userId: number;
@@ -20,6 +20,19 @@ interface Props {
 }
 
 class UserPost extends React.Component<Props> {
+  // constructor(props: any) {
+  //   super(props);
+  //   this.state = {
+  //     postSelected: true
+  //   };
+  // }
+  handleClose = () => {
+    const { posts } = this.props;
+    if (posts.length === 1) {
+      return null;
+    }
+  };
+
   render() {
     const { posts } = this.props;
     if (!posts || posts.length < 1) {
@@ -27,20 +40,30 @@ class UserPost extends React.Component<Props> {
     }
     const firstPost = posts[0];
     return (
-      <Table celled>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Title</Table.HeaderCell>
-            <Table.HeaderCell>Body</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body id="posts">
-          <Table.Row key={firstPost.id}>
-            <Table.Cell>{firstPost.title}</Table.Cell>
-            <Table.Cell>{firstPost.body}</Table.Cell>
-          </Table.Row>
-        </Table.Body>
-      </Table>
+      <div>
+        <Button
+          onClick={e => this.handleClose}
+          color="red"
+          size="tiny"
+          floated="left"
+        >
+          X
+        </Button>
+        <Table celled>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Title</Table.HeaderCell>
+              <Table.HeaderCell>Body</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body id="posts">
+            <Table.Row key={firstPost.id}>
+              <Table.Cell>{firstPost.title}</Table.Cell>
+              <Table.Cell>{firstPost.body}</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
+      </div>
     );
   }
 }
