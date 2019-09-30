@@ -4,6 +4,7 @@ import { getUserPost, getUserList } from "../actions";
 import Search from "./search";
 import { Table } from "semantic-ui-react";
 import CSS from "csstype";
+import { User, Post, AppState } from "./../types";
 
 const searchStyle: CSS.Properties = {
   display: "flex",
@@ -13,29 +14,29 @@ const searchStyle: CSS.Properties = {
 const tableInfo: CSS.Properties = {
   cursor: "pointer"
 };
-interface User {
-  id: number;
-  email: string;
-  name: string;
-  address: {
-    city: string;
-  };
-  company: {
-    name: string;
-  };
-}
+// interface User {
+//   id: number;
+//   email: string;
+//   name: string;
+//   address: {
+//     city: string;
+//   };
+//   company: {
+//     name: string;
+//   };
+// }
 
-interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
+// interface Post {
+//   userId: number;
+//   id: number;
+//   title: string;
+//   body: string;
+// }
 
-interface AppState {
-  users: User[];
-  posts: Post[];
-}
+// interface AppState {
+//   users: User[];
+//   posts: Post[];
+// }
 
 interface DispatchProps {
   getUsers: () => void;
